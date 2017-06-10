@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NetCoreBasicAccounting.Data;
+using NetCoreBasicAccounting.Data._Core;
 using NetCoreBasicAccounting.Models;
 using NetCoreBasicAccounting.Services;
 

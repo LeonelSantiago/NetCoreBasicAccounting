@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NetCoreBasicAccounting.Data.Entities;
+using NetCoreBasicAccounting.Models;
 
 namespace NetCoreBasicAccounting.Data._Core
 {
-    public class GeneralAccountingContext : IdentityDbContext
+    public class BasicAccountingContext : IdentityDbContext
     {
-        public GeneralAccountingContext(DbContextOptions<GeneralAccountingContext> options) : base(options)
+        public BasicAccountingContext(DbContextOptions<BasicAccountingContext> options) : base(options)
         {
         }
 

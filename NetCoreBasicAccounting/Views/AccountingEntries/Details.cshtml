@@ -1,0 +1,54 @@
+@model NetCoreBasicAccounting.Data.Entities.AccountingEntry
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AccountingEntry</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AuxiliarOrigin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AuxiliarOrigin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MovementType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MovementType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountingSeatDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountingSeatDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountingSeatAmount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountingSeatAmount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

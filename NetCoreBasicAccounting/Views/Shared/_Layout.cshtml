@@ -28,13 +28,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">NetCoreBasicAccounting</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Basic Accounting</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>*@
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>*@
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>*@
+                    <li><a asp-area="" asp-controller="AccountingAccounts" asp-action="Index">Cuentas Contables</a></li>
+                    <li><a asp-area="" asp-controller="AccountingEntries" asp-action="Index">Entrada Contable</a></li>
+                    <li><a asp-area="" asp-controller="AccountTypes" asp-action="Index">Tipo de Cuentas</a></li>
+                    <li><a asp-area="" asp-controller="Majorizations" asp-action="Index">Mayorización</a></li>
+                    <li><a asp-area="" asp-controller="MoneyCurrencies" asp-action="Index">Monedas</a></li>
+                    <li><a asp-area="" asp-controller="AccountingParameters" asp-action="Index">Parametros Contables</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

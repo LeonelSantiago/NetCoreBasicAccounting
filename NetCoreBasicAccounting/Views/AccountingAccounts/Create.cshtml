@@ -1,0 +1,79 @@
+@using NetCoreBasicAccounting.Data.Enums
+@model NetCoreBasicAccounting.Data.Entities.AccountingAccount
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>AccountingAccount</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AllowsTransactions" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="AllowsTransactions" asp-items="@Html.GetEnumSelectList<AllowsTransactions>()" class="form-control"></select>
+                <span asp-validation-for="AllowsTransactions" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AccountType" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="AccountType" asp-items="@ViewBag.AccountsType" class="form-control"></select>
+                <span asp-validation-for="AccountType" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Level" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Level" asp-items="@Html.GetEnumSelectList<AccountLevels>()" class="form-control"></select>
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="HigherAccount" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="HigherAccount" asp-items="@ViewBag.HigherAccounts" class="form-control"></select>
+                <span asp-validation-for="HigherAccount" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Balance" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Balance" class="form-control" />
+                <span asp-validation-for="Balance" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Status" asp-items="@Html.GetEnumSelectList<Status>()" class="form-control"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

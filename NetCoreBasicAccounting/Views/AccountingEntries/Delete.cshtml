@@ -1,0 +1,59 @@
+@model NetCoreBasicAccounting.Data.Entities.AccountingEntry
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AccountingEntry</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AuxiliarOrigin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AuxiliarOrigin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MovementType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MovementType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountingSeatDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountingSeatDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountingSeatAmount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountingSeatAmount)
+        </dd>
+        <input type="hidden" asp-for="ID" />
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>

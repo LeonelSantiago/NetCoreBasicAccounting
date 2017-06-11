@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NetCoreBasicAccounting.Models;
+using NetCoreBasicAccounting.Data.Entities;
 
 namespace NetCoreBasicAccounting.Data._Core
 {
@@ -18,5 +19,17 @@ namespace NetCoreBasicAccounting.Data._Core
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<NetCoreBasicAccounting.Data.Entities.AccountingAccount> AccountingAccount { get; set; }
+
+        public DbSet<NetCoreBasicAccounting.Data.Entities.AccountingParameter> AccountingParameter { get; set; }
+
+        public DbSet<NetCoreBasicAccounting.Data.Entities.AccountType> AccountType { get; set; }
+
+        public DbSet<NetCoreBasicAccounting.Data.Entities.Majorization> Majorization { get; set; }
+
+        public DbSet<NetCoreBasicAccounting.Data.Entities.MoneyCurrency> MoneyCurrency { get; set; }
+
+        public DbSet<NetCoreBasicAccounting.Data.Entities.AccountingEntry> AccountingEntry { get; set; }
     }
 }

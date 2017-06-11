@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NetCoreBasicAccounting.Data.Enums;
+using NetCoreBasicAccounting.Data._Core;
 
 namespace NetCoreBasicAccounting.Data.Entities
 {
-    public class AccountingAccount
+    public class AccountingAccount : Entity
     {
         public string Description { get; set; }
         public AccountType AccountType { get; set; }

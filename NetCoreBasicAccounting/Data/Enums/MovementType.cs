@@ -8,7 +8,7 @@ namespace NetCoreBasicAccounting.Data.Enums
 {
     public enum MovementType
     {
-        [Display(Name = "Dbito")]
+        [Display(Name = "Débito")]
         Debit = 0,
         [Display(Name = "Crédito")]
         Credit = 1

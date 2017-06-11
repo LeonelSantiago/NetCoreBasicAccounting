@@ -1,0 +1,64 @@
+@model NetCoreBasicAccounting.Data.Entities.AccountingParameter
+@using NetCoreBasicAccounting.Data.Enums
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>AccountingParameter</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="ProcessYear" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ProcessYear" class="form-control" />
+                <span asp-validation-for="ProcessYear" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Month" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Month" class="form-control" min="1" max="12" maxlength="2" />
+                <span asp-validation-for="Month" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MajorizationProcessed" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="MajorizationProcessed" asp-items="@Html.GetEnumSelectList<MajorizationProcessed>()" class="form-control"></select>
+                <span asp-validation-for="MajorizationProcessed" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Rnc" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Rnc" class="form-control" />
+                <span asp-validation-for="Rnc" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MonthFiscalClose" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MonthFiscalClose" class="form-control"  min="1" max="12" maxlength="2" />
+                <span asp-validation-for="MonthFiscalClose" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using NetCoreBasicAccounting.Data._Core;
+using NetCoreBasicAccounting.Data.Enums;
 
 namespace NetCoreBasicAccounting.Data.Migrations
 {
@@ -15,25 +14,27 @@ namespace NetCoreBasicAccounting.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rc3")
+                .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
                     b.Property<string>("Name")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
+                        .IsUnique()
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
@@ -105,8 +106,6 @@ namespace NetCoreBasicAccounting.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("AspNetUserRoles");
                 });
 
@@ -125,9 +124,134 @@ namespace NetCoreBasicAccounting.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("NetCoreBasicAccounting.Data.Entities.AccountingAccount", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccountType");
+
+                    b.Property<int>("AllowsTransactions");
+
+                    b.Property<decimal>("Balance");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("HigherAccount");
+
+                    b.Property<int>("Level");
+
+                    b.Property<int>("Status");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("AccountingAccount");
+                });
+
+            modelBuilder.Entity("NetCoreBasicAccounting.Data.Entities.AccountingEntry", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("AccountID");
+
+                    b.Property<decimal>("AccountingSeatAmount");
+
+                    b.Property<DateTime>("AccountingSeatDate");
+
+                    b.Property<int>("AuxiliarOrigin");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("MovementType");
+
+                    b.Property<int>("Status");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AccountID");
+
+                    b.ToTable("AccountingEntry");
+                });
+
+            modelBuilder.Entity("NetCoreBasicAccounting.Data.Entities.AccountingParameter", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("MajorizationProcessed");
+
+                    b.Property<int>("Month");
+
+                    b.Property<int>("MonthFiscalClose");
+
+                    b.Property<int>("ProcessYear");
+
+                    b.Property<string>("Rnc");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("AccountingParameter");
+                });
+
+            modelBuilder.Entity("NetCoreBasicAccounting.Data.Entities.AccountType", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Origin");
+
+                    b.Property<int>("Status");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("AccountType");
+                });
+
+            modelBuilder.Entity("NetCoreBasicAccounting.Data.Entities.Majorization", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("Balance");
+
+                    b.Property<int?>("HigherAccountIdentificationID");
+
+                    b.Property<DateTime>("ProcessDate");
+
+                    b.Property<int>("Status");
+
+                    b.Property<int>("TipoMovimiento");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("HigherAccountIdentificationID");
+
+                    b.ToTable("Majorization");
+                });
+
+            modelBuilder.Entity("NetCoreBasicAccounting.Data.Entities.MoneyCurrency", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<decimal>("LastExchangeRate");
+
+                    b.Property<int>("Status");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("MoneyCurrency");
+                });
+
             modelBuilder.Entity("NetCoreBasicAccounting.Models.ApplicationUser", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
 
@@ -135,7 +259,7 @@ namespace NetCoreBasicAccounting.Data.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -144,10 +268,10 @@ namespace NetCoreBasicAccounting.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash");
 
@@ -160,7 +284,7 @@ namespace NetCoreBasicAccounting.Data.Migrations
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
@@ -209,6 +333,20 @@ namespace NetCoreBasicAccounting.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("NetCoreBasicAccounting.Data.Entities.AccountingEntry", b =>
+                {
+                    b.HasOne("NetCoreBasicAccounting.Data.Entities.AccountingAccount", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountID");
+                });
+
+            modelBuilder.Entity("NetCoreBasicAccounting.Data.Entities.Majorization", b =>
+                {
+                    b.HasOne("NetCoreBasicAccounting.Data.Entities.AccountingAccount", "HigherAccountIdentification")
+                        .WithMany()
+                        .HasForeignKey("HigherAccountIdentificationID");
                 });
         }
     }

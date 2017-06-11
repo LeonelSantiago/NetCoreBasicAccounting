@@ -31,5 +31,8 @@ namespace NetCoreBasicAccounting.Data._Core
         public DbSet<NetCoreBasicAccounting.Data.Entities.MoneyCurrency> MoneyCurrency { get; set; }
 
         public DbSet<NetCoreBasicAccounting.Data.Entities.AccountingEntry> AccountingEntry { get; set; }
+
+        public DbSet<NetCoreBasicAccounting.Models.ComprobationBalance> ComprobationBalances { get; set; }
+
     }
 }

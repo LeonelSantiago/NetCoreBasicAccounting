@@ -56,6 +56,27 @@ namespace NetCoreBasicAccounting.Controllers
             return View();
         }
 
+        public async Task AccountAmountUpdate(string accountId, int movementType, decimal entryAmount)
+        {
+            var accountingEntryAccount = await _context.AccountingAccount.SingleOrDefaultAsync(m => m.ID.ToString() == accountId );
+            
+            var higherAccount = await _context.AccountingAccount.SingleOrDefaultAsync(
+                m => m.ID.ToString() == accountingEntryAccount.HigherAccount.ToString());
+
+            if (movementType == 0)
+            {
+                accountingEntryAccount.Balance -= entryAmount;
+                higherAccount.Balance -= entryAmount;
+            }
+            else
+            {
+                accountingEntryAccount.Balance = accountingEntryAccount.Balance + entryAmount;
+                higherAccount.Balance = higherAccount.Balance + entryAmount;
+            }
+            _context.Update(accountingEntryAccount);
+            _context.Update(higherAccount);
+            await _context.SaveChangesAsync();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -65,10 +86,10 @@ namespace NetCoreBasicAccounting.Controllers
             accountingEntry.Account = (from c in _context.AccountingAccount
                 where c.ID.ToString() == accountingAccount.ToString()
                 select c).Single();
-
             if (ModelState.IsValid)
             {
                 _context.Add(accountingEntry);
+                await AccountAmountUpdate(accountingAccount, accountingEntry.MovementType.GetHashCode(), accountingEntry.AccountingSeatAmount);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

@@ -36,13 +36,27 @@
                 <span asp-validation-for="AccountingSeatDate" class="text-danger"></span>
             </div>
         </div>
-        @*<div class="form-group">
+        <div class="form-group">
+            <label  class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input type="button" id="btnAddDebit"  class="btn btn-primary" value="Agregar Cuenta Debitar" />
+                <input type="button" id="btnAddCredit" class="btn btn-primary" value="Agregar Cuenta Creditar" />
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-md-2 control-label"></label>
+            <div class="col-md-10" id="container">
+
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="MovementType" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <select asp-for="MovementType" asp-items="@Html.GetEnumSelectList<MovementType>()" class="form-control"></select>
                 <span asp-validation-for="MovementType" class="text-danger"></span>
             </div>
-        </div>*@
+        </div>
         <div class="form-group">
             <label asp-for="AccountToDebit" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -53,7 +67,7 @@
         <div class="form-group">
             <label asp-for="AccountToCredit" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="AccountToCredit" @*asp-items="@ViewBag.AccountingAccount"*@ class="form-control"></select>
+                <select asp-for="AccountToCredit" asp-items="@ViewBag.AccountingAccount" class="form-control"></select>
                 <span asp-validation-for="AccountToCredit" class="text-danger"></span>
             </div>
         </div>
@@ -86,4 +100,59 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(function () {
+            $("#btnAddCredit").click(function (e) {
+                var itemIndex = $("#container input.iHidden").length;
+                e.preventDefault();
+                var accounts = $.get("@Url.Action("GetAccounts", "AccountingEntries")", function() {
+                    
+                });
+                var newAccountDropDown = $(
+                   " <label class='control-label'>Cuenta para Creditar</label>"
+                    +
+                   @*"<select asp-for='AccountToCredit' value='Cuenta'" +
+                   'asp-items="@ViewBag.AccountingAccount"' +
+                   "class='form-control' id='Account_" +
+                   itemIndex +
+                    "__Id'></select>"
+                    +*@
+                    "<select asp-for='AccountToCredit' value='Cuenta'" +
+                    'asp-items="' + accounts + '"' +
+                    "class='form-control' id='Account_" +
+                    itemIndex +
+                    "__Id'></select>"
+                    +
+                    "<input asp-for='AccountingSeatAmount' class='form-control' />");
+                
+                var newItem = $("<tr><td><input id='Interests_" + itemIndex + "__Id' type='hidden' value='' class='iHidden'  name='Interests[" + itemIndex + "].Id' /><input type='text' id='Interests_" + itemIndex + "__InterestText' name='Interests[" + itemIndex + "].InterestText'/></td><td><input type='checkbox' value='true'  id='Interests_" + itemIndex + "__IsExperienced' name='Interests[" + itemIndex + "].IsExperienced' /></tr>");
+                $("#container").append(newAccountDropDown);
+            });
+        });
+        $(function () {
+            $("#btnAddDebit").click(function (e) {
+                var itemIndex = $("#container input.iHidden").length;
+                e.preventDefault();
+                var newAccountDropDown = $(
+                    " <label class='control-label'>Cuenta para Debitar</label>"
+                    +
+                    @*"<select asp-for='AccountToDebit' value='Cuenta'" +
+                    'asp-items="@ViewBag.AccountingAccount"' +
+                    "class='form-control' id='Account_" +
+                    itemIndex +
+                    "__Id'></select>"
+                    +*@
+                    "<select asp-for='AccountToDebit' value='Cuenta'" +
+                    'asp-items="@ViewBag.AccountingAccount"' +
+                    "class='form-control' id='Account_" +
+                    itemIndex +
+                    "__Id'></select>"
+                    +
+                    "<input asp-for='AccountingSeatAmount' class='form-control' />");
+                
+                var newItem = $("<tr><td><input id='Interests_" + itemIndex + "__Id' type='hidden' value='' class='iHidden'  name='Interests[" + itemIndex + "].Id' /><input type='text' id='Interests_" + itemIndex + "__InterestText' name='Interests[" + itemIndex + "].InterestText'/></td><td><input type='checkbox' value='true'  id='Interests_" + itemIndex + "__IsExperienced' name='Interests[" + itemIndex + "].IsExperienced' /></tr>");
+                $("#container").append(newAccountDropDown);
+            });
+        });
+    </script>
 }

@@ -50,9 +50,14 @@ namespace NetCoreBasicAccounting.Controllers
             return View(accountingEntry);
         }
 
+        public IActionResult GetAccounts()
+        {
+           return ViewBag.AccountingAccount = new SelectList(_context.AccountingAccount.Where( c => c.AllowsTransactions == 0), "ID", "Description");
+        }
+
         public IActionResult Create()
         {
-            ViewBag.AccountingAccount = new SelectList(_context.AccountingAccount.Where( c => c.AllowsTransactions == 0), "ID", "Description");
+            //GetAccounts();
             return View();
         }
 

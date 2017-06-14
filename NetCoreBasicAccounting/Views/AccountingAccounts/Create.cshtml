@@ -43,7 +43,9 @@
         <div class="form-group">
             <label asp-for="HigherAccount" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="HigherAccount" asp-items="@ViewBag.HigherAccounts" class="form-control"></select>
+                <select asp-for="HigherAccount" asp-items="@ViewBag.HigherAccounts" class="form-control">
+                    <option value="0">Ninguna</option>
+                </select>
                 <span asp-validation-for="HigherAccount" class="text-danger"></span>
             </div>
         </div>

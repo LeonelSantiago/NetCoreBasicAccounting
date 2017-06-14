@@ -83,9 +83,9 @@ namespace NetCoreBasicAccounting.Controllers
         public async Task<IActionResult> Create(AccountingEntry accountingEntry, IFormCollection form)
         {
             var accountingAccount = form["Account"];
-            accountingEntry.Account = (from c in _context.AccountingAccount
-                where c.ID.ToString() == accountingAccount.ToString()
-                select c).Single();
+            //accountingEntry.AccountToDebit = (from c in _context.AccountingAccount
+            //    where c.ID.ToString() == accountingAccount.ToString()
+            //    select c).Single();
             if (ModelState.IsValid)
             {
                 _context.Add(accountingEntry);

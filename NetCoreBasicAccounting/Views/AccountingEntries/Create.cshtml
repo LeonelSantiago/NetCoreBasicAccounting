@@ -14,13 +14,7 @@
         <h4>Entrada Contable - Fecha @ViewBag.Date </h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Account" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="Account" asp-items="@ViewBag.AccountingAccount" class="form-control"></select>
-                <span asp-validation-for="Account" class="text-danger"></span>
-            </div>
-        </div>
+
         <div class="form-group">
             <label asp-for="Description" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -36,19 +30,34 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="MovementType" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="MovementType" asp-items="@Html.GetEnumSelectList<MovementType>()" class="form-control"></select>
-                <span asp-validation-for="MovementType" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
             <label asp-for="AccountingSeatDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="AccountingSeatDate" value="@ViewBag.Date" class="form-control" readonly="readonly" />
                 <span asp-validation-for="AccountingSeatDate" class="text-danger"></span>
             </div>
         </div>
+        @*<div class="form-group">
+            <label asp-for="MovementType" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="MovementType" asp-items="@Html.GetEnumSelectList<MovementType>()" class="form-control"></select>
+                <span asp-validation-for="MovementType" class="text-danger"></span>
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="AccountToDebit" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="AccountToDebit" asp-items="@ViewBag.AccountingAccount" class="form-control"></select>
+                <span asp-validation-for="AccountToDebit" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AccountToCredit" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="AccountToCredit" @*asp-items="@ViewBag.AccountingAccount"*@ class="form-control"></select>
+                <span asp-validation-for="AccountToCredit" class="text-danger"></span>
+            </div>
+        </div>
+
         <div class="form-group">
             <label asp-for="AccountingSeatAmount" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -56,13 +65,13 @@
                 <span asp-validation-for="AccountingSeatAmount" class="text-danger"></span>
             </div>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="Status" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <select asp-for="Status" asp-items="@Html.GetEnumSelectList<Status>()" class="form-control"></select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
-        </div>
+        </div>*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

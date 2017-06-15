@@ -50,9 +50,19 @@ namespace NetCoreBasicAccounting.Controllers
             return View(accountingEntry);
         }
 
-        public IActionResult GetAccounts()
+        public IActionResult GetAccountsToCreditDropwDown(int id, int movementType)
         {
-           return ViewBag.AccountingAccount = new SelectList(_context.AccountingAccount.Where( c => c.AllowsTransactions == 0), "ID", "Description");
+            ViewBag.MovementType = movementType;
+            ViewBag.AccountDropDownId = id;
+            ViewBag.AccountingAccount = new SelectList(_context.AccountingAccount.Where(c => c.AllowsTransactions == 0), "ID", "Description");
+            return View("_GetAccountsToCredit");
+        }
+
+        public IActionResult GetAccountsToDebitDropwDown(int id)
+        {
+            ViewBag.AccountDropDownId = id;
+            ViewBag.AccountingAccount = new SelectList(_context.AccountingAccount.Where(c => c.AllowsTransactions == 0), "ID", "Description");
+            return View("_GetAccountsToDebit");
         }
 
         public IActionResult Create()
@@ -94,7 +104,7 @@ namespace NetCoreBasicAccounting.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(accountingEntry);
-                await AccountAmountUpdate(accountingAccount, accountingEntry.MovementType.GetHashCode(), accountingEntry.AccountingSeatAmount);
+                //await AccountAmountUpdate(accountingAccount, accountingEntry.MovementType.GetHashCode(), accountingEntry.AccountingSeatAmount);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

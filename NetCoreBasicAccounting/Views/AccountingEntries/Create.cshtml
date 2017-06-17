@@ -30,6 +30,14 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <br/>
+                @Html.DropDownListFor(model => model.MoneyCurrency, (IEnumerable<SelectListItem>)ViewBag.MoneyCurrency, "Moneda", new { @id = "AccountToCredit" ,  @class = "form-control"})
+                <br/>
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="AccountingSeatDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="AccountingSeatDate" value="@ViewBag.Date" class="form-control" readonly="readonly" />
@@ -37,51 +45,29 @@
             </div>
         </div>
         <div class="form-group">
-            <label  class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input type="button" id="btnAddDebit"  class="btn btn-primary" value="Agregar Cuenta Debitar" />
-                <input type="button" id="btnAddCredit" class="btn btn-primary" value="Agregar Cuenta Creditar" />
-
-            </div>
-        </div>
-        <div class="form-group">
             <label class="col-md-2 control-label">Cuenta/s a Creditar</label>
-            <div id="containerToCredit">
-                @* Here the DropDowns  to credit are rendered with jquery *@
+            <div class="col-md-10">
+                <br/>
+                    @Html.DropDownListFor(model => model.AccountToCredit, (IEnumerable<SelectListItem>) ViewBag.AccountingAccount, "Cuenta a Debitar", new { @id = "AccountToCredit" ,  @class = "form-control"})
+                <br/>
+                <label>Monto</label>
+                <input asp-for='AmountToCredit' class='form-control' id="AmountToCredit" type="number" value="0" min="1"/>
             </div>
         </div>
         <div class="form-group">
-            <label>Cuenta/s a Debitar</label>
-            <div id="containerToDebitt">
-                @* Here the DropDowns  to credit are rendered with jquery *@
+            <label class="col-md-2 control-label">Cuenta/s a Debitar</label>
+            <div class="col-md-10">
+                <br/>
+                    @Html.DropDownListFor(model => model.AccountToDebit, (IEnumerable<SelectListItem>) ViewBag.AccountingAccount, "Cuenta a Creditar", new { @id = "AccountToDebit", @class = "form-control"})
+                <br/>
+                <label>Monto</label>
+                <input asp-for='AmountToDebit' class='form-control' id="AmountToDebit" type="number" value="0" min="1"/>
             </div>
         </div>
         <hr/>
-        @*<div class="form-group">
-            <label asp-for="AccountToDebit" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="AccountToDebit" asp-items="@ViewBag.AccountingAccount" class="form-control"></select>
-                <span asp-validation-for="AccountToDebit" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="AccountToCredit" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="AccountToCredit" asp-items="@ViewBag.AccountingAccount" class="form-control"></select>
-                <span asp-validation-for="AccountToCredit" class="text-danger"></span>
-            </div>
-        </div>*@
-
-        @*<div class="form-group">
-            <label asp-for="Status" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="Status" asp-items="@Html.GetEnumSelectList<Status>()" class="form-control"></select>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-        </div>*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" id="submitButton"/>
             </div>
         </div>
     </div>
@@ -94,23 +80,22 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-        $(function () {
-            $("#btnAddCredit").click(function (e) {
-                var itemIndex = $("#containerToCredit select").length;
-                e.preventDefault();
-                $.get("@Url.Action("GetAccountsToCreditDropwDown", "AccountingEntries", new { id = 1, movementType = 0 })", function(data) {
-                    $("#containerToCredit").append(data);
-                });
-            });
+        $("#AccountToDebit").change(function() {
+            var accountToDebit = $("#AccountToDebit").val();
+            var accountToCredit = $("#AccountToCredit").val();
+
+            if (accountToDebit === accountToCredit) {
+                $("#AccountToDebit").after('<span class="warning"> Las cuentas no pueden ser iguales</span>');
+                $("#submitButton").hide();
+            }
         });
-        $(function () {
-            $("#btnAddDebit").click(function (e) {
-                var itemIndex = $("#containerToDebit select").length;
-                e.preventDefault();
-                $.get("@Url.Action("GetAccountsToCreditDropwDown", "AccountingEntries", new { id = 1, movementType = 1 })", function(data) {
-                    $("#containerToDebit").append(data);
-                });
-            });
+    </script>
+    <script>
+        $("#AmountToDebit").keyup(function () {
+            document.querySelector("#AmountToCredit").value = document.querySelector("#AmountToDebit").value;
         });
+        //$("#AmountToCredit").keyup(function () {
+        //    document.querySelector("#AmountToCredit").value = document.querySelector("#AmountToDebit").value;
+        //});
     </script>
 }

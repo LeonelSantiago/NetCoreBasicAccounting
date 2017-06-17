@@ -5,20 +5,7 @@
 }
 
 <div class="col-md-2"></div>
-<div class="col-md-10">
-    <br/>
-    @if (ViewBag.MovementType == 0)
-    {
-        @Html.DropDownListFor(model => model.AccountToCredit, (IEnumerable<SelectListItem>) ViewBag.AccountingAccount, "Seleccione una cuenta", new {id = ViewBag.AccountDropDownId, @class = "form-control"})
-    }
-    else if (ViewBag.MovementType == 1)
-    {
-        @Html.DropDownListFor(model => model.AccountToDebit, (IEnumerable<SelectListItem>) ViewBag.AccountingAccount, "Seleccione una cuenta", new {id = ViewBag.AccountDropDownId, @class = "form-control"})
-    }
-    <br/>
-    <label>Monto</label>
-    <input asp-for='AccountingSeatAmount' class='form-control'/>
-</div>
+
 <br/>
 <hr/>
 

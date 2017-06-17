@@ -13,9 +13,12 @@
     </p>
 }
 
-<table class="table">
+<table class="table table-hover table">
     <thead>
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountingSeatDate)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
@@ -23,19 +26,28 @@
             @Html.DisplayNameFor(model => model.AuxiliarOrigin)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.MoneyCurrencyRate)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.AccountToDebit)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.MovementType)
-        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.AccountingSeatDate)
+            @Html.DisplayNameFor(model => model.AccountToDebitDescription)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccountingSeatAmount)
+            @Html.DisplayNameFor(model => model.AmountToDebit)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.AccountToCredit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountToCreditDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountToCredit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsMajorizationProcessed)
         </th>
         <th></th>
     </tr>
@@ -44,25 +56,37 @@
     @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.AccountingSeatDate)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AuxiliarOrigin)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.MoneyCurrencyRate)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.AccountToDebit)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.MovementType)
-            </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.AccountingSeatDate)
+                @Html.DisplayFor(modelItem => item.AccountToDebitDescription)
             </td>
             <td>
-                RD$ @item.AccountingSeatAmount.ToString("n2")
+                @Html.DisplayFor(modelItem => item.AmountToDebit)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.AccountToCredit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountToCreditDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountToCredit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsMajorizationProcessed)
             </td>
             <td>
                 @*<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |*@

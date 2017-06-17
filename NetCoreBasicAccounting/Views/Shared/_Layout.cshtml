@@ -48,13 +48,17 @@
             </div>
         </div>
     </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2017 - NetCoreBasicAccounting</p>
-        </footer>
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-12">
+            @RenderBody()
+        </div>
     </div>
+    <hr/>
+    <footer>
+        <p>&copy; 2017 - NetCoreBasicAccounting</p>
+    </footer>
+</div>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

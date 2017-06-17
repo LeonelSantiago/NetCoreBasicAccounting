@@ -10,33 +10,48 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AccountID)
+            @Html.DisplayNameFor(model => model.AccountToCredit)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.AccountToCreditDescription)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccountAmount)
+            @Html.DisplayNameFor(model => model.AmountToCredit)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MovementTypeDescription)
+            @Html.DisplayNameFor(model => model.AccountToDebit)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountToDebitDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountToCredit)
+        </th>
+
     </tr>
     </thead>
     <tbody>
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AccountID)
+                @Html.DisplayFor(modelItem => item.AccountToCredit)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.AccountToCreditDescription)
             </td>
             <td>
-                @item.AccountAmount.ToString("n2")
+                @item.AmountToCredit.ToString("n2")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MovementTypeDescription)
+                @Html.DisplayFor(modelItem => item.AccountToDebit)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountToDebitDescription)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountToDebit)
             </td>
         </tr>
     }

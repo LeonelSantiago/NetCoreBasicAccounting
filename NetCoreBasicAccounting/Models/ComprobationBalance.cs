@@ -8,9 +8,11 @@ namespace NetCoreBasicAccounting.Models
     public class ComprobationBalance
     {
         public int ID { get; set; }
-        public int AccountID { get; set; }
-        public string Description { get; set; }
-        public string AccountAmount { get; set; }
-        public string MovementTypeDescription { get; set; }
+        public int AccountToCredit { get; set; }
+        public string AccountToCreditDescription { get; set; }
+        public int AccountToDebit { get; set; }
+        public decimal AmountToDebit { get; set; }
+        public string AccountToDebitDescription { get; set; }
+        public decimal AmountToCredit { get; set; }
     }
 }

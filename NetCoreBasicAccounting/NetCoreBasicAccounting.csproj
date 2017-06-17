@@ -11,6 +11,17 @@
   <PropertyGroup>
     <UserSecretsId>aspnet-NetCoreBasicAccounting-058599ff-5d55-4678-a9c4-5464ad3ba92f</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20170611005109_Initial.cs" />
+    <Compile Remove="Data\Migrations\20170611005109_Initial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20170611043532_ChangeOfPropertiesTypesInAccountingParameters.cs" />
+    <Compile Remove="Data\Migrations\20170611043532_ChangeOfPropertiesTypesInAccountingParameters.Designer.cs" />
+    <Compile Remove="Data\Migrations\20170611063737_ChangeOfPropertiesTypeInAccountingAccount.cs" />
+    <Compile Remove="Data\Migrations\20170611063737_ChangeOfPropertiesTypeInAccountingAccount.Designer.cs" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />

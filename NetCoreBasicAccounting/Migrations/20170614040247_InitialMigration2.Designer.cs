@@ -9,9 +9,10 @@ using NetCoreBasicAccounting.Data.Enums;
 namespace NetCoreBasicAccounting.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170614040247_InitialMigration2")]
+    partial class InitialMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -131,6 +132,10 @@ namespace NetCoreBasicAccounting.Migrations
 
                     b.Property<int?>("AccountTypeID");
 
+                    b.Property<int?>("AccountingEntryID");
+
+                    b.Property<int?>("AccountingEntryID1");
+
                     b.Property<int>("AllowsTransactions");
 
                     b.Property<decimal>("Balance");
@@ -147,6 +152,10 @@ namespace NetCoreBasicAccounting.Migrations
 
                     b.HasIndex("AccountTypeID");
 
+                    b.HasIndex("AccountingEntryID");
+
+                    b.HasIndex("AccountingEntryID1");
+
                     b.ToTable("AccountingAccount");
                 });
 
@@ -155,19 +164,9 @@ namespace NetCoreBasicAccounting.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AccountToCredit");
-
-                    b.Property<string>("AccountToCreditDescription");
-
-                    b.Property<int>("AccountToDebit");
-
-                    b.Property<string>("AccountToDebitDescription");
+                    b.Property<decimal>("AccountingSeatAmount");
 
                     b.Property<DateTime>("AccountingSeatDate");
-
-                    b.Property<decimal>("AmountToCredit");
-
-                    b.Property<decimal>("AmountToDebit");
 
                     b.Property<int>("AuxiliarOrigin");
 
@@ -175,9 +174,7 @@ namespace NetCoreBasicAccounting.Migrations
 
                     b.Property<int>("IsMajorizationProcessed");
 
-                    b.Property<int>("MoneyCurrency");
-
-                    b.Property<decimal>("MoneyCurrencyRate");
+                    b.Property<int>("MovementType");
 
                     b.Property<int>("Status");
 
@@ -396,6 +393,14 @@ namespace NetCoreBasicAccounting.Migrations
                     b.HasOne("NetCoreBasicAccounting.Data.Entities.AccountType", "AccountType")
                         .WithMany()
                         .HasForeignKey("AccountTypeID");
+
+                    b.HasOne("NetCoreBasicAccounting.Data.Entities.AccountingEntry")
+                        .WithMany("AccountToCredit")
+                        .HasForeignKey("AccountingEntryID");
+
+                    b.HasOne("NetCoreBasicAccounting.Data.Entities.AccountingEntry")
+                        .WithMany("AccountToDebit")
+                        .HasForeignKey("AccountingEntryID1");
                 });
 
             modelBuilder.Entity("NetCoreBasicAccounting.Data.Entities.AccountingEntryDetail", b =>

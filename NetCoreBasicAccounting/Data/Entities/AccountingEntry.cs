@@ -11,9 +11,15 @@ namespace NetCoreBasicAccounting.Data.Entities
     {
         public string Description { get; set; }
         public int AuxiliarOrigin { get; set; }
-        public AccountingAccount Account { get; set; }
-        public MovementType MovementType { get; set; }
+        public int AccountToDebit { get; set; }
+        public string AccountToDebitDescription { get; set; }
+        public int AccountToCredit { get; set; }
+        public string AccountToCreditDescription { get; set; }
         public DateTime AccountingSeatDate { get; set; }
-        public decimal AccountingSeatAmount { get; set; }
+        public decimal AmountToCredit { get; set; }
+        public decimal AmountToDebit { get; set; }
+        public MajorizationProcessed IsMajorizationProcessed { get; set; }
+        public int MoneyCurrency { get; set; }
+        public decimal MoneyCurrencyRate { get; set; }
     }
 }

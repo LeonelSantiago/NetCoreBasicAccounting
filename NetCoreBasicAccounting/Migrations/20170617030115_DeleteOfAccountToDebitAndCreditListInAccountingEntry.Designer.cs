@@ -9,9 +9,10 @@ using NetCoreBasicAccounting.Data.Enums;
 namespace NetCoreBasicAccounting.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170617030115_DeleteOfAccountToDebitAndCreditListInAccountingEntry")]
+    partial class DeleteOfAccountToDebitAndCreditListInAccountingEntry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -157,11 +158,7 @@ namespace NetCoreBasicAccounting.Migrations
 
                     b.Property<int>("AccountToCredit");
 
-                    b.Property<string>("AccountToCreditDescription");
-
                     b.Property<int>("AccountToDebit");
-
-                    b.Property<string>("AccountToDebitDescription");
 
                     b.Property<DateTime>("AccountingSeatDate");
 
@@ -174,10 +171,6 @@ namespace NetCoreBasicAccounting.Migrations
                     b.Property<string>("Description");
 
                     b.Property<int>("IsMajorizationProcessed");
-
-                    b.Property<int>("MoneyCurrency");
-
-                    b.Property<decimal>("MoneyCurrencyRate");
 
                     b.Property<int>("Status");
 

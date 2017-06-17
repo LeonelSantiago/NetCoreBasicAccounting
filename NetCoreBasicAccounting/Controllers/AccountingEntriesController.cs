@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NetCoreBasicAccounting.Data.Entities;
+using NetCoreBasicAccounting.Data.Enums;
 using NetCoreBasicAccounting.Data._Core;
 using Remotion.Linq.Clauses;
 
@@ -50,9 +51,21 @@ namespace NetCoreBasicAccounting.Controllers
             return View(accountingEntry);
         }
 
-        public IActionResult Create()
+        //public Task GetAccountsToCreditDropwDown(int accountToDebitId)
+        //{
+        //   return ViewBag.AccountingAccount = new SelectList(_context.AccountingAccount.Where(c => c.AllowsTransactions == 0  && c.ID != accountToDebitId), "ID", "Description");
+        //}
+
+        public async Task SetDropDowns()
         {
-            ViewBag.AccountingAccount = new SelectList(_context.AccountingAccount.Where( c => c.AllowsTransactions == 0), "ID", "Description");
+            ViewBag.AccountingAccount = new SelectList(_context.AccountingAccount.Where(c => c.AllowsTransactions == 0), "ID", "Description");
+            ViewBag.MoneyCurrency = new SelectList(_context.MoneyCurrency, "ID", "Description");
+
+        }
+
+        public async Task<IActionResult> Create()
+        {
+           await SetDropDowns();
             return View();
         }
 
@@ -80,16 +93,25 @@ namespace NetCoreBasicAccounting.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AccountingEntry accountingEntry, IFormCollection form)
+        public async Task<IActionResult> Create(AccountingEntry accountingEntry)
         {
-            var accountingAccount = form["Account"];
-            accountingEntry.Account = (from c in _context.AccountingAccount
-                where c.ID.ToString() == accountingAccount.ToString()
-                select c).Single();
+            accountingEntry.MoneyCurrencyRate = (from c in _context.MoneyCurrency
+                                              where c.ID.ToString() == accountingEntry.MoneyCurrency.ToString()
+                                              select c.LastExchangeRate).Single();
+
+            accountingEntry.AccountToDebitDescription = (from c in _context.AccountingAccount
+                where c.ID.ToString() == accountingEntry.AccountToDebit.ToString()
+                select c.Description).Single();
+
+            accountingEntry.AccountToCreditDescription = (from c in _context.AccountingAccount
+                where c.ID.ToString() == accountingEntry.AccountToCredit.ToString()
+                select c.Description).Single();
+
+            accountingEntry.IsMajorizationProcessed = MajorizationProcessed.NotProcessed;
+
             if (ModelState.IsValid)
             {
                 _context.Add(accountingEntry);
-                await AccountAmountUpdate(accountingAccount, accountingEntry.MovementType.GetHashCode(), accountingEntry.AccountingSeatAmount);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

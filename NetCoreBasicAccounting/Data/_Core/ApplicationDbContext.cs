@@ -33,6 +33,7 @@ namespace NetCoreBasicAccounting.Data._Core
         public DbSet<NetCoreBasicAccounting.Data.Entities.AccountingEntry> AccountingEntry { get; set; }
 
         public DbSet<NetCoreBasicAccounting.Models.ComprobationBalance> ComprobationBalances { get; set; }
+        public DbSet<AccountingEntryDetail> AccountingEntryDetails { get; set; }
 
     }
 }

@@ -9,9 +9,10 @@ using NetCoreBasicAccounting.Data.Enums;
 namespace NetCoreBasicAccounting.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170617153913_ChangeOfPropertiesInComprobationBalance")]
+    partial class ChangeOfPropertiesInComprobationBalance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -357,7 +358,7 @@ namespace NetCoreBasicAccounting.Migrations
 
                     b.Property<string>("AccountToDebitDescription");
 
-                    b.Property<decimal>("AmountToCredit");
+                    b.Property<string>("AmountToCredit");
 
                     b.Property<decimal>("AmountToDebit");
 

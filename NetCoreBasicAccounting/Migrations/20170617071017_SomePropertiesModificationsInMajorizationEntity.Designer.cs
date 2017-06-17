@@ -9,9 +9,10 @@ using NetCoreBasicAccounting.Data.Enums;
 namespace NetCoreBasicAccounting.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170617071017_SomePropertiesModificationsInMajorizationEntity")]
+    partial class SomePropertiesModificationsInMajorizationEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

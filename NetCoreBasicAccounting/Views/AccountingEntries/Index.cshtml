@@ -1,4 +1,5 @@
-﻿@model IEnumerable<NetCoreBasicAccounting.Data.Entities.AccountingEntry>
+﻿@using NetCoreBasicAccounting.Data.Enums
+@model IEnumerable<NetCoreBasicAccounting.Data.Entities.AccountingEntry>
 
 @{
     ViewBag.Title = "Index";
@@ -90,8 +91,14 @@
             </td>
             <td>
                 @*<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |*@
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                @*<a asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a>
+                @if (item.IsMajorizationProcessed == MajorizationProcessed.NotProcessed)
+                {
+                    <a href="@Url.Action("AccountEntryMajorization", "Majorizations", new {accountryEntryId = item.ID})">
+                        <button type="button" class="btn btn-primary">Mayorizar</button>
+                    </a>
+                }
+
             </td>
         </tr>
     }

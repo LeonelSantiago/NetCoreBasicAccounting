@@ -20,26 +20,14 @@ namespace NetCoreBasicAccounting.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<ComprobationBalance> comprobationBalance = new List<ComprobationBalance>().AsQueryable();
-            using (_context)
+            var accountingEnry = from c in _context.AccountingEntry select c;
+            var comprobationBalance = _context.ComprobationBalances;
+            foreach (var item in accountingEnry)
             {
-             var query = @"SELECT
-                e.[AccountID]
-	            , a.[Description]
-                ,SUM(e.[AccountingSeatAmount]) as AccountAmount
-	            , CASE e.MovementType 
-		        WHEN 0 THEN 'DEBITO'
-		        WHEN 1 THEN 'CREDITO'
-		      END as 'MovementTypeDescription'
-              FROM [aspnet-NetCoreBasicAccounting-21aff577-0fc2-4b44-8efa-8d6d6cb955f5].[dbo].[AccountingEntry] e,
-              [aspnet-NetCoreBasicAccounting-21aff577-0fc2-4b44-8efa-8d6d6cb955f5].[dbo].[AccountingAccount] a
-              WHERE e.AccountID = a.ID
-              GROUP BY e.AccountID, a.Description, e.MovementType";
-                 comprobationBalance = _context.ComprobationBalances.FromSql(query).ToList();
+                comprobationBalance
             }
 
-          
-            return View(comprobationBalance);
+
         }
     }
 }

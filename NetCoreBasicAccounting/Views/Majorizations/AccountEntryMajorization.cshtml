@@ -1,0 +1,89 @@
+@model NetCoreBasicAccounting.Data.Entities.Majorization
+
+@{
+    ViewData["Title"] = "Mayorizar";
+}
+
+<h2>Delete</h2>
+
+<h3>Seguro/a que desea mayorizar esta entrada contable?</h3>
+<div>
+    <h4>Majorization</h4>
+    <hr />
+    <form asp-action="AccountEntryMajorization">
+        <div class="form-horizontal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ProcessDate" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ProcessDate" class="form-control" readonly="readonly"/>
+                        <span asp-validation-for="ProcessDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AccountingEntryId" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="AccountingEntryId" class="form-control" readonly="readonly"/>
+                        <span asp-validation-for="AccountingEntryId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AccountToDebit" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="AccountToDebit" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="AccountToDebit" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AccountToDebitHigherAccount" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="AccountToDebitHigherAccount" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="AccountToDebitHigherAccount" class="text-danger"></span>
+                    </div>
+                </div>
+            <div class="form-group">
+                <label asp-for="AmountToDebit" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="AmountToDebit" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="AmountToDebit" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountToCredit" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="AccountToCredit" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="AccountToCredit" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountToCreditHigherAccount" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="AccountToCreditHigherAccount" class="form-control"  readonly="readonly"/>
+                    <span asp-validation-for="AccountToCreditHigherAccount" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmountToCredit" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="AmountToCredit" class="form-control" readonly="readonly"/>
+                    <span asp-validation-for="AmountToCredit" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Balance" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Balance" class="form-control" readonly="readonly"/>
+                    <span asp-validation-for="Balance" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class=" col-md-offset-2 col-md-10">
+                    <input type="submit" value="Mayorizar Entrada Contable" class="btn btn-success" /> |
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
